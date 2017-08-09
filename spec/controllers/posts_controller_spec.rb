@@ -13,5 +13,15 @@ RSpec.describe PostsController, type: :controller do
 
       expect(assigns(:post)).to be_a_new(Post)
     end
+
+    it 'renders a form for the user to create a new post' do
+      sign_in(user)
+
+      get :new
+
+      expect(response.body).to include('Create New Post')
+      expect(response.body).to include('title')
+      expect(response.body).to include('content')
+    end
   end
 end
