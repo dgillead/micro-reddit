@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :find_post, only: [:show]
+
   def new
     @post = Post.new
   end
@@ -13,9 +16,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def post_params
     params.permit(:title, :content)
+  end
+
+  def find_post
+    @post = Post.find_by(id: params[:id])
   end
 end
