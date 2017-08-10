@@ -24,4 +24,12 @@ RSpec.describe PostsController, type: :controller do
       expect(response.body).to include('content')
     end
   end
+
+  describe 'POST #create' do
+    it 'creates a new post with the entered params' do
+      sign_in(user)
+
+      expect{ post :create, params: { title: 'Hello', content: 'this is the content' } }.to change{ Post.count }.by(1)
+    end
+  end
 end
