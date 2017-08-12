@@ -31,7 +31,7 @@ RSpec.describe PostsController, type: :controller do
     it 'creates a new post with the entered params' do
       sign_in(user)
 
-      expect{ post :create, params: { title: 'Hello', content: 'this is the content' } }.to change{ Post.count }.by(1)
+      expect{ post :create, params: { user_id: user.to_param, post: post_params } }.to change{ Post.count }.by(1)
     end
   end
 
