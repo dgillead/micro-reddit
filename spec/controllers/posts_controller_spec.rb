@@ -47,4 +47,18 @@ RSpec.describe PostsController, type: :controller do
       expect(response.body).to include('hi')
     end
   end
+
+  describe 'GET #edit' do
+    it 'display a form for the user to edit the post' do
+      sign_in(user)
+      post_params[:user_id] = user.id
+      post = Post.create!(post_params)
+
+      get :edit, params: { id: post.id }
+
+      expect(response.body).to include('Edit')
+      expect(response.body).to include('hello')
+      expect(response.body).to include('hi')
+    end
+  end
 end

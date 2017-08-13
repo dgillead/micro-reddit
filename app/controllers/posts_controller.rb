@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_post, only: [:show]
+  before_action :find_post, only: [:show, :edit]
 
   def new
     @post = Post.new
@@ -17,6 +17,9 @@ class PostsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
   end
 
   private
