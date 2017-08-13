@@ -76,4 +76,14 @@ RSpec.describe PostsController, type: :controller do
       expect(post.content).to eq('new content')
     end
   end
+
+  describe 'DELETE #destroy' do
+    it 'deletes the current post' do
+      sign_in(user)
+      post_params[:user_id] = user.id
+      post = Post.create!(post_params)
+
+      expect { delete :destroy, params: { id: post.id } }.to change{ Post.count }.by(-1)
+    end
+  end
 end
