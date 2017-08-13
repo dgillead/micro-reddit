@@ -61,4 +61,19 @@ RSpec.describe PostsController, type: :controller do
       expect(response.body).to include('hi')
     end
   end
+
+  describe 'PUT #update' do
+    it 'updates the current post' do
+      sign_in(user)
+      post_params[:user_id] = user.id
+      post = Post.create!(post_params)
+      update_params = { title: 'hello again', content: 'new content'}
+
+      put :update, params: { id: post.id, post: update_params }
+      post.reload
+
+      expect(post.title).to eq('hello again')
+      expect(post.content).to eq('new content')
+    end
+  end
 end
