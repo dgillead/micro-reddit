@@ -1,0 +1,13 @@
+<%= form_for (comment) do |f| %>
+
+  <div class="text-center">
+    <div class="field">
+      <%= f.label :content %>
+      <%= f.text_area :content, required: 'required' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

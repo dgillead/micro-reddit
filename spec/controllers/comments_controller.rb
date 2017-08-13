@@ -14,6 +14,14 @@ RSpec.describe CommentsController, type: :controller do
 
       expect(assigns(:comment)).to be_a_new(Comment)
     end
+
+    it 'renders a form for the user to create a new comment' do
+      sign_in(user)
+
+      get :new
+
+      expect(response.body).to include('New Comment')
+    end
   end
 
 
