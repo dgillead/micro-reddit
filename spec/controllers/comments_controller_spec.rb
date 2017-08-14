@@ -70,4 +70,13 @@ RSpec.describe CommentsController, type: :controller do
       expect(comment.content).to eq('new comment content')
     end
   end
+
+  describe 'DELETE #destroy' do
+    it 'destroys the selected comment' do
+      sign_in(user)
+      comment = post_one.comments.create!(content: 'comment content')
+
+      expect{ delete :destroy, params: { post_id: post_one.id, id: comment.id } }.to change{ post_one.comments.count }.by(-1)
+    end
+  end
 end

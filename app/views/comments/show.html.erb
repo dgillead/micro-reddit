@@ -3,6 +3,7 @@
   <h1>New comment for <%= @post.title %> </h1>
   <p><%= @comment.content %></p>
 
-  <%= link_to 'Edit Comment', edit_comment_path(post_id: @post.id) %>
+  <%= link_to 'Edit Comment', edit_comment_path(post_id: @post.id) %><br>
+  <%= link_to 'Delete Comment', comment_path(post_id: @post.id), method: :delete %>
 
 </div>

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_post, only: [:new, :create, :show, :edit, :update]
-  before_action :find_comment, only: [:show, :edit, :update]
+  before_action :find_post, only: [:new, :create, :show, :edit, :update, :destroy]
+  before_action :find_comment, only: [:show, :edit, :update, :destroy]
 
   def new
     @comment = Comment.new
@@ -28,6 +28,11 @@ class CommentsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @comment.destroy
+    redirect_to @post
   end
 
   private
