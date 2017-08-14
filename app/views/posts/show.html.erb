@@ -1,2 +1,4 @@
 <h1 class="text-center"><%= @post.title %></h1>
 <p class="text-center"><%= @post.content %></p>
+
+<%= link_to 'Create New Comment', new_comment_path(post_id: @post.id) %>

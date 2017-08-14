@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_post, only: [:create]
+  before_action :find_post, only: [:new, :create]
 
   def new
     @comment = Comment.new
@@ -8,7 +8,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.new(comment_params)
-    @comment.save
+    if @comment.save
+      redirect_to @comment
+    else
+      render :new
+    end
   end
 
   private
