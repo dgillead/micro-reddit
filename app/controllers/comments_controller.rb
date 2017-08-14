@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_post, only: [:new, :create, :show]
-  before_action :find_comment, only: [:show]
+  before_action :find_post, only: [:new, :create, :show, :edit]
+  before_action :find_comment, only: [:show, :edit]
 
   def new
     @comment = Comment.new
@@ -17,6 +17,9 @@ class CommentsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
   end
 
   private

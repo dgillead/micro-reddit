@@ -33,4 +33,28 @@ RSpec.describe CommentsController, type: :controller do
       expect{ post :create, params: { post_id: post_one.to_param, comment: comment_params } }.to change{ post_one.comments.count }.by(1)
     end
   end
+
+  describe 'GET #show' do
+    it 'displays the newly created comment' do
+      sign_in(user)
+      comment = post_one.comments.create!(content: 'comment content')
+
+      get :show, params: { post_id: post_one.id, id: comment.id }
+
+      expect(response.body).to include('comment content')
+      expect(response.body).to include('Post title')
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'displays a form for the user to edit the comment' do
+      sign_in(user)
+      comment = post_one.comments.create!(content: 'comment content')
+
+      get :edit, params: { post_id: post_one.id, id: comment.id }
+
+      expect(response.body).to include('Edit Comment')
+      expect(response.body).to include('comment content')
+    end
+  end
 end
