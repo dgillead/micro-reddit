@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_post, only: [:new, :create, :show, :edit]
-  before_action :find_comment, only: [:show, :edit]
+  before_action :find_post, only: [:new, :create, :show, :edit, :update]
+  before_action :find_comment, only: [:show, :edit, :update]
 
   def new
     @comment = Comment.new
@@ -20,6 +20,14 @@ class CommentsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @comment.update_attributes(comment_params)
+      redirect_to comment_path(@comment.id, post_id: @post.id)
+    else
+      render :edit
+    end
   end
 
   private

@@ -57,4 +57,17 @@ RSpec.describe CommentsController, type: :controller do
       expect(response.body).to include('comment content')
     end
   end
+
+  describe 'PUT #update' do
+    it 'updates the comment with the new text' do
+      sign_in(user)
+      comment = post_one.comments.create!(content: 'comment content')
+      update_content = { content: 'new comment content' }
+
+      put :update, params: { post_id: post_one.id, id: comment.id, comment: update_content }
+      comment.reload
+
+      expect(comment.content).to eq('new comment content')
+    end
+  end
 end
