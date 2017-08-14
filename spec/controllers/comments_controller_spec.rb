@@ -12,7 +12,7 @@ RSpec.describe CommentsController, type: :controller do
     it 'assigns a new comment to @comment' do
       sign_in(user)
 
-      get :new
+      get :new, params: { post_id: post_one.id }
 
       expect(assigns(:comment)).to be_a_new(Comment)
     end
@@ -20,7 +20,7 @@ RSpec.describe CommentsController, type: :controller do
     it 'renders a form for the user to create a new comment' do
       sign_in(user)
 
-      get :new
+      get :new, params: { post_id: post_one.id }
 
       expect(response.body).to include('New Comment')
     end
